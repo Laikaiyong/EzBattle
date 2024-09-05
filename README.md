@@ -6,7 +6,7 @@ This starter kit contains everything you need to get started with Solana dApps! 
 
 ## What's included
 
-### **🗝️ Connect to a Solana wallet and validate ownership**
+### **🗝️ Connect to a Solana wallet and validate owner**
 
 The basics first!
 
