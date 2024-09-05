@@ -92,40 +92,115 @@ export function HomeContent() {
   const hasFetchedData = publicKey && signState === "success" && data;
 
   return (
-    <div className="grid grid-cols-1">
-      {hasFetchedData ? (
-        <div>
-          <ItemList items={data} />
-        </div>
-      ) : (
-        <div className="text-center">
-          {!publicKey && (
-            <div className="card border-2 border-primary mb-5">
-              <div className="card-body items-center">
-                <h2 className="card-title text-center text-primary mb-2">
-                  Please connect your wallet to get a list of your NFTs
-                </h2>
+    <div className="flex min-h-screen bg-gray-900 text-white">
+      {/* Sidebar */}
+      <div className="w-1/4 bg-gray-800 p-4">
+        <h2 className="text-xl font-bold mb-4">Upcoming Tournaments</h2>
+        <ul className="space-y-4">
+          {["CSGO", "DOTA 2", "Fortnite", "Call of Duty"].map((game, idx) => (
+            <li key={idx} className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold">{game}</p>
+                <p className="text-xs text-gray-400">Starts in 16 hours</p>
               </div>
+              <p className="font-bold text-green-400">8 SOL</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-grow p-6">
+        {/* Featured Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="relative">
+            <img
+              className="w-full h-64 object-cover rounded-lg"
+              src="https://via.placeholder.com/500x300"
+              alt="Tournament Banner"
+            />
+            <div className="absolute bottom-4 left-4">
+              <h2 className="text-3xl font-bold">Greyhound Gaming vs Rabbitohs</h2>
+              <p className="text-sm text-gray-300">
+                It is a long established fact that a reader will be distracted.
+              </p>
+            </div>
+          </div>
+          <div className="relative">
+            <img
+              className="w-full h-64 object-cover rounded-lg"
+              src="https://via.placeholder.com/500x300"
+              alt="Tournament Banner"
+            />
+            <div className="absolute bottom-4 left-4">
+              <h2 className="text-3xl font-bold">DOTA 2 Championship</h2>
+              <p className="text-sm text-gray-300">
+                It is a long established fact that a reader will be distracted.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Tournament List */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Tournaments</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {["Fortnite", "CSGO", "Call of Duty"].map((tournament, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition"
+              >
+                <h3 className="text-lg font-bold mb-2">{tournament}</h3>
+                <p className="text-sm text-gray-400">Tuesday Night Fight</p>
+                <p className="text-sm text-gray-400">2v2 G4 Teams</p>
+                <div className="flex justify-between items-center mt-4">
+                  <p className="text-green-400 font-bold">4.00 SOL</p>
+                  <button className="bg-green-500 text-sm text-white py-1 px-4 rounded">
+                    Enter Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* NFT Section */}
+        <div className="grid grid-cols-1">
+          {hasFetchedData ? (
+            <div>
+              <ItemList items={data} />
+            </div>
+          ) : (
+            <div className="text-center">
+              {!publicKey && (
+                <div className="card border-2 border-primary mb-5">
+                  <div className="card-body items-center">
+                    <h2 className="card-title text-center text-primary mb-2">
+                      Please connect your wallet to get a list of your NFTs
+                    </h2>
+                  </div>
+                </div>
+              )}
+              {publicKey && signState === "error" && (
+                <div className="card border-2 border-primary mb-5">
+                  <div className="card-body items-center text-center">
+                    <h2 className="card-title text-center mb-2">
+                      Please verify your wallet manually
+                    </h2>
+                    <Button
+                      state={signState}
+                      onClick={onSignClick}
+                      className="btn-primary"
+                    >
+                      Verify wallet
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
-          {publicKey && signState === "error" && (
-            <div className="card border-2 border-primary mb-5">
-              <div className="card-body items-center text-center">
-                <h2 className="card-title text-center mb-2">
-                  Please verify your wallet manually
-                </h2>
-                <Button
-                  state={signState}
-                  onClick={onSignClick}
-                  className="btn-primary"
-                >
-                  Verify wallet
-                </Button>
-              </div>
-            </div>
-          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
