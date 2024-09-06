@@ -344,7 +344,7 @@ export function HomeContent({onTransact}: {onTransact: Function}) {
         {/* Sidebar */}
         <div className="w-1/4  p-4">
         <Link
-        href='/creLinkte'
+        href='/create'
         className="mt-4 bg-success w-full text-white py-2 px-4 rounded"
       >
         Create
