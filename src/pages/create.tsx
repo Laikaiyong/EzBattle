@@ -13,8 +13,6 @@ import { TxSendData } from "@pages/api/tx/send";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { fetcher, useDataFetch } from "@utils/use-data-fetch";
-import { toast } from "react-hot-toast";
-import { Modal } from "@components/layout/modal";
 import { Footer } from "@components/layout/footer";
 
 const Create: NextPage = () => {
@@ -28,7 +26,7 @@ const Create: NextPage = () => {
     const [daoVoting, setDaoVoting] = useState(false);
     const [nftPrize, setNftPrize] = useState(false);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = (e: any) => {
       e.preventDefault();
       const formData = {
         game,

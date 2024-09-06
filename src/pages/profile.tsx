@@ -15,7 +15,6 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey, Transaction } from "@solana/web3.js";
 import { fetcher, useDataFetch } from "@utils/use-data-fetch";
 import { toast } from "react-hot-toast";
-import { Modal } from "@components/layout/modal";
 import { Footer } from "@components/layout/footer";
 
 const Profile: NextPage = () => {

@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { Transaction } from "@solana/web3.js";
 import { SignCreateData } from "@pages/api/sign/create";
 import { SignValidateData } from "@pages/api/sign/validate";
+import Link from "next/link";
 
 export function HomeContent({onTransact}: {onTransact: Function}) {
   const { publicKey, signTransaction } = useWallet();
@@ -78,11 +79,11 @@ export function HomeContent({onTransact}: {onTransact: Function}) {
     const [nftPrize, setNftPrize] = useState(false);
     const [nftDetails, setNftDetails] = useState("");
 
-    const handlePrizeTypeChange = (e) => {
+    const handlePrizeTypeChange = (e: any) => {
       setPrizeType(e.target.value);
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = (e: any) => {
       e.preventDefault();
       const formData = {
         prizeType,
@@ -342,12 +343,12 @@ export function HomeContent({onTransact}: {onTransact: Function}) {
       <div className="flex min-h-screen  ">
         {/* Sidebar */}
         <div className="w-1/4  p-4">
-        <a
-        href='/create'
+        <Link
+        href='/creLinkte'
         className="mt-4 bg-success w-full text-white py-2 px-4 rounded"
       >
         Create
-      </a>
+      </Link>
           <h2 className="text-xl font-bold mb-4 mt-4">Upcoming Tournaments</h2>
           <ul className="space-y-4">
             {[
