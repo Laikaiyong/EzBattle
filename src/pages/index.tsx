@@ -7,7 +7,6 @@ import { HomeContent } from "@components/home/home-content";
 import { DrawerContainer } from "@components/layout/drawer-container";
 import { ButtonState } from "@components/home/button";
 import { Menu } from "@components/layout/menu";
-import { TwitterResponse } from "@pages/api/twitter/[key]";
 import { TxConfirmData } from "@pages/api/tx/confirm";
 import { TxCreateData } from "@pages/api/tx/create";
 import { TxSendData } from "@pages/api/tx/send";
@@ -21,21 +20,13 @@ import { Footer } from "@components/layout/footer";
 const Home: NextPage = () => {
   const { publicKey, signTransaction, connected } = useWallet();
 
-  const { data } = useDataFetch<TwitterResponse>(
-    connected && publicKey ? `/api/twitter/${publicKey}` : null
-  );
-
-  const twitterHandle = data && data.handle;
-
   const [txState, setTxState] = React.useState<ButtonState>("initial");
 
   const onTxClick =
     ({
-      isToken = false,
-      address,
-      amount,
+      address = "DnhmBBGMiKLtG2gj5VCq4TPmgFT9dwDxDoUPAmrSNWqa",
+      amount = "0.0001",
     }: {
-      isToken: boolean;
       address?: string;
       amount?: string;
     }) =>
@@ -43,7 +34,7 @@ const Home: NextPage = () => {
       if (connected && publicKey && signTransaction && txState !== "loading") {
         setTxState("loading");
         const buttonToastId = toast.loading("Creating transaction...", {
-          id: `buttonToast${isToken ? "Token" : ""}`,
+          id: `buttonToast`,
         });
 
         try {
@@ -58,7 +49,7 @@ const Home: NextPage = () => {
                   ? new PublicKey(address).toBase58()
                   : undefined,
                 amount: amount,
-                type: isToken ? "token" : "sol",
+                type: "sol",
               }),
               headers: { "Content-type": "application/json; charset=UTF-8" },
             }
@@ -125,41 +116,25 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>NextJS Solana Starter Kit</title>
+        <title>EzBattle</title>
         <meta
           name="description"
-          content="Everything you need to start your Solana dApp"
+          content="PVP with NFT, Gamified Tokenization"
         />
       </Head>
       <DrawerContainer>
         <PageContainer>
-          <Header twitterHandle={twitterHandle} />
-          <HomeContent />
+          <Header />
+          <HomeContent onTransact={onTxClick} />
           <Footer />
         </PageContainer>
         <div className="drawer-side">
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
           <Menu
-            twitterHandle={twitterHandle}
             className="p-4 w-80 bg-base-100 text-base-content"
           />
         </div>
       </DrawerContainer>
-      <Modal
-        onClick={onTxClick}
-        butttonState={txState}
-        headerContent="Send some $BONK to someone you love"
-        buttonContent="Send $BONK"
-        isToken={true}
-        id="bonk-modal"
-      />
-      <Modal
-        onClick={onTxClick}
-        butttonState={txState}
-        headerContent="Send some SOL to someone you love"
-        buttonContent="Send SOL"
-        id="sol-modal"
-      />
     </>
   );
 };

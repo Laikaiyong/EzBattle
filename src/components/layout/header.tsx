@@ -6,7 +6,7 @@ type Props = {
   twitterHandle?: string;
 };
 
-export function Header({ twitterHandle }: Props) {
+export function Header() {
   return (
     <div className="navbar mb-6 shadow-lg bg-neutral text-neutral-content rounded-box">
       <div className="navbar-start">
@@ -20,7 +20,6 @@ export function Header({ twitterHandle }: Props) {
       <div className="navbar-end">
         <div className="hidden lg:block">
           <Menu
-            twitterHandle={twitterHandle}
             className="menu-horizontal px-1"
           />
         </div>

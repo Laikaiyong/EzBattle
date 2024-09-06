@@ -2,11 +2,6 @@
   "name": "nextjs-solana-starter-kit",
   "description": "Build your own Solana dApp with NextJS and TypeScript",
   "version": "0.1.0",
-  "author": {
-    "name": "Bernardo Raposo",
-    "email": "hi@bernardoraposo.com",
-    "url": "http://bernardoraposo.com"
-  },
   "license": "MIT",
   "scripts": {
     "dev": "next dev",

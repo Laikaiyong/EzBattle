@@ -35,11 +35,11 @@ export default async function handler(
       })
     );
 
-    const blockHash = (await connection.getLatestBlockhash("finalized"))
-      .blockhash;
+    // const blockHash = (await connection.getLatestBlockhash("finalized"))
+      // .blockhash;
 
     tx.feePayer = publicKey;
-    tx.recentBlockhash = blockHash;
+    // tx.recentBlockhash = blockHash;
 
     const serializedTransaction = tx.serialize({
       requireAllSignatures: false,

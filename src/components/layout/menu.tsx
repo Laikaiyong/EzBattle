@@ -1,13 +1,13 @@
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import classNames from "classnames";
+import Link from "next/link";
 
 type Props = {
-  twitterHandle?: string;
   className?: string;
 };
 
-export function Menu({ twitterHandle, className }: Props) {
+export function Menu({ className }: Props) {
   const { connected } = useWallet();
   const menuClasses = classNames("menu", className);
 
@@ -15,37 +15,18 @@ export function Menu({ twitterHandle, className }: Props) {
     <ul className={menuClasses}>
       {connected && (
         <>
-          {twitterHandle && (
-            <li className="rounded-box">
-              <a
-                href={`https://www.twitter.com/${twitterHandle}`}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost lg:btn mb-1 lg:mr-1 lg:mb-0"
-              >
-                @{twitterHandle}
-              </a>
-            </li>
-          )}
           <li>
-            <label
-              htmlFor="bonk-modal"
-              className="btn-ghost lg:btn mb-1 lg:mr-1 lg:mb-0"
-            >
-              Send $Bonk
-            </label>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <label
-              htmlFor="sol-modal"
-              className="btn-ghost lg:btn mb-1 lg:mr-1 lg:mb-0"
-            >
-              Send SOL
-            </label>
+            <Link href="/leaderboard">Leaderboard</Link>
+          </li>
+          <li>
+            <Link href="/profile">Profile</Link>
           </li>
         </>
       )}
-      <WalletMultiButton className="btn" />
+      <WalletMultiButton className="btn mt-4" />
     </ul>
   );
 }
